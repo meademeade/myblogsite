@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+<loc>https://deepbytes.netlify.app/</loc>
+<priority>1.0</priority>
+</url>
+<url>
+<loc>https://deepbytes.netlify.app/about/</loc>
+<lastmod>2021-08-07</lastmod>
+<changefreq>always/hourly/daily/weekly/monthly/yearly/never</changefreq>
+</url>
+<url>
+<loc>https://deepbytes.netlify.app/posts/</loc>
+</url>
+
+<url>
+<loc></loc>
+</url>
+
+<url>
+<loc>https://deepbytes.netlify.app/category/casestudy/</loc>
+</url>
+<url>
+<loc>https://deepbytes.netlify.app/category/tools/</loc>
+</url>
+<url>
+<loc>https://deepbytes.netlify.app/tags/</loc>
+</url>
+
+
+
+</urlset>
