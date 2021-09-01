@@ -2,9 +2,9 @@
 <html lang="en-us">
   <head><link rel="icon" href="/favicon_main.svg"><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://example.com/posts/testing_markdown/" />
-    <meta property="og:type" content="article" /><meta property="og:title" content="For Website  Developer." /><meta property="og:description" content="For website development. Draft = False so Page is online" /><meta property="og:image:width"  content="375" />
-        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://example.com/posts/testing_markdown/forimage_hube300cc787cce89f857f2b80467aee38_94622_600x0_resize_q75_box.jpg" /><title>digital forensic blog - For Website  Developer.</title>
+<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://example.com/category/tools/timestomping/" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="NTFS and ext4 file stomping" /><meta property="og:description" content="Manipulating timestamps of files stored in NTFS or ext4 file system " /><meta property="og:image:width"  content="375" />
+        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://example.com/category/tools/timestomping/celleb_hu863044eaed4de10728e8417775172825_94699_600x0_resize_q75_box.jpg" /><title>digital forensic blog - NTFS and ext4 file stomping</title>
 
     
 <link href="https://fonts.googleapis.com/css?family=Open&#43;Sans" rel="stylesheet">
@@ -233,131 +233,90 @@
   <div class="container">
     <div class="columns">
       <div class="column is-centered-tablet-portrait">
-        <h1 class="title is-2 section-title">For Website  Developer.</h1>
+        <h1 class="title is-2 section-title">NTFS and ext4 file stomping</h1>
         <h5 class="subtitle is-5 is-muted"></h5>
         <div class="divider"></div>
         
         <section class="section content has-text-justified">
-          <!-- raw HTML omitted -->
-<h1 id="heading1">Heading1</h1>
-<h2 id="heading-2">heading 2</h2>
-<h3 id="heading-3">heading 3</h3>
-<!-- raw HTML omitted -->
-<p><em>This text is italics</em></p>
-<p><em>This is also italics</em></p>
-<!-- raw HTML omitted -->
-<p><strong>This is Bold</strong>
-<strong>This is also bold</strong></p>
-<!-- raw HTML omitted -->
-<p><del>This is strike through</del></p>
-<!-- raw HTML omitted -->
+          <h1 id="ntfs-and-ext4-file-stomping">NTFS and ext4 File Stomping</h1>
+<p><em>We will learn to manipulate timestamps of file systems. First I will show you how to change timestamps of NTFS file system using setmace tool and then we will manipulate ext4 file system timestamps in linux</em></p>
 <hr>
-<hr>
-<hr>
-<!-- raw HTML omitted -->
-<p>Now Escaping star below</p>
-<p>I am  *star*</p>
-<!-- raw HTML omitted -->
-<p>Check how you can post put long paragraph in block. My theme doesn&rsquo;t show horizontal slider. so I split paragraph in multiple lines.</p>
-<blockquote>
-<p>This is first line in block 1 .<!-- raw HTML omitted -->
-This is second line in block 1</p>
-<p>This is new paragraph in same block 1</p>
-</blockquote>
-<blockquote>
-<p>This is completely new block</p>
-<blockquote>
-<p>This is nested block quote</p>
-</blockquote>
-</blockquote>
-<hr>
-<p>To put a blockquote within a list item, the blockquote’s &gt; delimiters need to be indented:</p>
-<ul>
+<h2 id="a--ntfs-time-stomping">A)  NTFS Time stomping</h2>
+<h5 id="prerequisite">Prerequisite</h5>
+<ol>
 <li>
-<p>A list item with a blockquote:</p>
+<p>You should have windows xp/7/8 to perform this lab. I have not tested this tool on windows 10/11.</p>
+</li>
+<li>
+<p>Download setmace tool from following link 
+<a href="https://github.com/jschicht/SetMace/blob/master/SetMace.exe">setmace.exe official download link</a></p>
+</li>
+<li>
+<p>Store above downloaded file <strong>Setmace.exe</strong>  on desktop.</p>
+</li>
+<li>
+<p>Create and store one sample text file(In my case sids.txt). We will change timestamps of this file.</p>
+</li>
+</ol>
 <blockquote>
-<p>This is a blockquote
-inside a list item.</p>
+<p>Note : store setmace.exe and your text file on different windows storage drives(C,D,E,..).</p>
+<p>For example:  Store <strong>setmace.exe</strong> on desktop (Say C:\Admin\Desktop)   and store text file <strong>sids.txt</strong> on D drive (Say D:\sids.txt)</p>
 </blockquote>
-</li>
-</ul>
-<hr>
-<!-- raw HTML omitted -->
-<p>link as shown below
-<a href="https://amazon.in">buy</a></p>
-<p>Disabling Automatic URL Linking</p>
-<p>If you don’t want a URL to be automatically linked, you can remove the link by denoting the URL as code with backticks.</p>
-<p><code>http://www.example.com</code></p>
-<hr>
-<!-- raw HTML omitted -->
-<p>Unordered List</p>
-<ul>
-<li>item1</li>
-<li>item2
-<ul>
-<li>nested item 3</li>
-<li>nested item 4</li>
-</ul>
-</li>
-</ul>
-<!-- raw HTML omitted -->
-<p>Now Ordered List</p>
+<h5 id="procedure-for-ntfs-time-stomping">Procedure for NTFS Time stomping</h5>
 <ol>
-<li>item1</li>
-<li>item2
-<ol>
-<li>item3</li>
-<li>item 4</li>
+<li>First I will check current timestamp on my sids.txt file</li>
 </ol>
+<p><img src="/img/timestomp/previous_timestamp_NTFS.jpg" alt="Current timestamp " title="It will show current timestamp of sids.txt"></p>
+<ol start="2">
+<li>
+<p>Now I will change <strong>creation timestamp</strong> of sids.txt file. For that open command prompt(with admin privliege)
+and change directory where you have kept <strong>setmace.exe</strong> file. (In my case Desktop)</p>
 </li>
-<li>item3</li>
+<li>
+<p>Run following command.It will change file creation timestamp</p>
+</li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\j</span>ohn<span style="color:#ae81ff">\D</span>esktop&gt;SetMace.exe E:<span style="color:#ae81ff">\s</span>ids.txt -c <span style="color:#e6db74">&#34;2000:01:01:00:00:00:789:1234&#34;</span>-si
+</code></pre></div><p><img src="/img/timestomp/execution_of_command.jpg" alt="Execution of setmace tool. Creation timestamp being changed" title="It will change current timestamp of sids.txt"></p>
+<p>We can see changed creation timestamp of file.As shown below.</p>
+<p><img src="/img/timestomp/changed_created_timestamp.jpg" alt="changed timesamp "></p>
+<ol start="4">
+<li>Now I will change <strong>Last accessed</strong> time stamp of sids.txt file. Follow above steps as it is. Just insert following command in command prompt.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">C:<span style="color:#ae81ff">\U</span>sers<span style="color:#ae81ff">\j</span>ohn<span style="color:#ae81ff">\D</span>esktop&gt;SetMace.exe E:<span style="color:#ae81ff">\s</span>ids.txt -a <span style="color:#e6db74">&#34;2000:01:01:00:00:00:789:1234&#34;</span> -si
+</code></pre></div><p>above command Execution will look like this.</p>
+<p><img src="/img/timestomp/setmace_lastaccess_execution.jpg" alt="Command execution for changing last accessed timestamp"></p>
+<p>After succesfull execution.We can check changed last accessed timestamp.</p>
+<p><img src="/img/timestomp/setmace_lastaccess_output.jpg" alt="Changed last accessed timestamp"></p>
+<blockquote>
+<p>Similarly we can change various timestamps of NTFS file systems. 
+You can perform more time stamp manipulations by  following official <a href="https://github.com/jschicht/SetMace">documentation</a></p>
+</blockquote>
 <hr>
-<!-- raw HTML omitted -->
-<h1 id="adding-online-image">Adding online image</h1>
-<p><img src="https://th.bing.com/th/id/R.6c35a1baa4dc57a18029f6c2928cdf91?rik=%2fpegdbT33S9Q5A&amp;riu=http%3a%2f%2finternetmarketingteam.com%2fwp-content%2fuploads%2f2017%2f05%2furl-web-address-300x300.png&amp;ehk=0vyi8AEXukPfHEzHQ19%2fa%2bECwwbuEUQw7bOo%2fAxbQlM%3d&amp;risl=&amp;pid=ImgRaw" alt="My avtaar"></p>
-<h1 id="adding-local-image">Adding local image</h1>
-<p>Image should be stored in static folder of website.
-This image is added in blog post</p>
-<p><img src="/img/nighthawk.jpg" alt="random plane" title="Lockheed F-117 Nighthawk"></p>
 <hr>
-<!-- raw HTML omitted -->
-<p>suppose you want to write inline code block</p>
-<p><code>&lt;p&gt;This is paragraph&lt;/p&gt;</code></p>
-<!-- raw HTML omitted -->
-<p>now in code block</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">    &lt;<span style="color:#f92672">p</span>&gt;This is paragraph&lt;/<span style="color:#f92672">p</span>&gt;
-    
-</code></pre></div><p>For python</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#66d9ef">if</span> a <span style="color:#f92672">&gt;</span> b :
-        print(<span style="color:#e6db74">&#34;A is greater&#34;</span>)
-</code></pre></div><hr>
-<!-- raw HTML omitted -->
-<table>
-<thead>
-<tr>
-<th>Names</th>
-<th>Emails</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>omk</td>
-<td>omkar@demo</td>
-</tr>
-<tr>
-<td>praf</td>
-<td>lester@demo</td>
-</tr>
-</tbody>
-</table>
+<h2 id="b-ext4-time-stomping">B) ext4 Time Stomping</h2>
+<h5 id="prerequisite-1">Prerequisite</h5>
+<ol>
+<li>You should have linux OS.You can change timestamp of any  file on this system.
+I will change timestamp of <strong>sids.pdf</strong>  file which is stored on  desktop of my ubuntu(SANS SIFT) linux distro.</li>
+</ol>
+<h5 id="procedure-">Procedure :</h5>
+<ol>
+<li>We will check time stamp of <strong>sids.pdf</strong>  file.</li>
+</ol>
+<blockquote>
+<p>Note: We also need another pdf file (In my case <strong>Network-Forensics-Poster.pdf</strong>) whose timestamp we will assign to <strong>sids.pdf</strong> 
+.Thus before manipulation of timestamp, I will check timestamp of both pdf files.</p>
+</blockquote>
+<ol start="2">
+<li>Now we will use <strong>touch</strong> command to change timestamp of <strong>sids.pdf</strong> file.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo touch -r Network-Forensics-Poster.pdf sids.pdf
+</code></pre></div><p><img src="/img/timestomp/ext4_timestomping.png" alt="ext4 file stomping"></p>
 <hr>
-<!-- raw HTML omitted -->
-<p>Task View</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> Task 1</li>
-<li><input disabled="" type="checkbox"> Task 2</li>
-</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Thus using setmace tool we changed timestamp in NTFS File system. 
+Using simple touch command we changed ext4 file system timestamp.</p>
 
         </section>
       </div>
